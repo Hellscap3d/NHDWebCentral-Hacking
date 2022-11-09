@@ -3,21 +3,17 @@ import flask, requests, os
 app = flask.Flask(__name__)
 baseurl = "https://site.nhd.org/"
 
-@app.route('/proxy/')
-def index():
-    r = requests.get(baseurl, headers=flask.request.headers)
-    resp = flask.make_response(r.content)
-    resp.mimetype = r.headers['content-type']
-    resp.status = r.status_code
-    return resp
-
 @app.route('/<path:path>', methods=['GET', 'POST', 'PUT', 'DELETE'])
 def proxy(path):
     if os.path.exists(f"overrides/{path}"):
         print("Using override")
         return flask.send_file(f"overrides/{path}")
     r = requests.request(flask.request.method, baseurl + path, headers=flask.request.headers, data=flask.request.data)
+    if path == "Assets/editor.js?f@Portal.Core.ApplicationCore.Version":
+        modcontent = r.content.replace(open("modold.js", "rb").read(), open("mod.js", "rb").read())
+        return flask.Response(modcontent, mimetype=r.headers['content-type'], status=r.status_code)
     return flask.Response(r.content, mimetype=r.headers['content-type'], status=r.status_code)
+
 @app.route('/', methods=['GET', 'POST'])
 def session():
     if flask.request.method == 'GET':
