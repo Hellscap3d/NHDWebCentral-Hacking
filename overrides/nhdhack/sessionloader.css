@@ -1,0 +1,62 @@
+body {
+    background-color: #000000;
+    color: #ffffff;
+    font-family: "Lucida Console", Monaco, monospace;
+    font-size: 12px;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    margin: 0 auto;
+    max-width: 800px;
+    padding: 0 20px;
+}
+
+.header {
+    background-color: #000000;
+    border-bottom: 1px solid #ffffff;
+    padding: 20px 0;
+}
+
+.header h1 {
+    color: #ffffff;
+    font-size: 24px;
+    font-weight: normal;
+    margin: 0;
+}
+
+.content h2 {
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: normal;
+    margin: 0;
+}
+
+.content p {
+    margin: 0;
+}
+
+form {
+    margin: 0;
+}
+
+input[type="text"] {
+    background-color: #000000;
+    border: 1px solid #ffffff;
+    color: #ffffff;
+    font-family: "Lucida Console", Monaco, monospace;
+    font-size: 12px;
+    margin: 0;
+    padding: 5px;
+}
+
+input[type="submit"] {
+    background-color: #000000;
+    border: 1px solid #ffffff;
+    color: #ffffff;
+    font-family: "Lucida Console", Monaco, monospace;
+    font-size: 12px;
+    margin: 0;
+    padding: 5px;
+}
