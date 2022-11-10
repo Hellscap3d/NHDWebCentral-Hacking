@@ -9,10 +9,10 @@ def proxy(path):
         print("Using override")
         return flask.send_file(f"overrides/{path}")
     r = requests.request(flask.request.method, baseurl + path, headers=flask.request.headers, data=flask.request.data)
-    if path == "Assets/editor.js?f@Portal.Core.ApplicationCore.Version":
-        modcontent = r.content.replace(open("modold.js", "rb").read(), open("mod.js", "rb").read())
+    if path == "Assets/editor.js":
+        modcontent = r.content.replace(b"'grapesjs-touch',", open("mod.js", "rb").read())
         return flask.Response(modcontent, mimetype=r.headers['content-type'], status=r.status_code)
-    if path == "/Edit":
+    if path == "Edit":
         return flask.Response(r.content.replace(b'<script src="/Assets/editor.js?f@Portal.Core.ApplicationCore.Version"></script>', b'<script src="/Assets/editor.js?f@Portal.Core.ApplicationCore.Version"></script>' + open("inject.html", "rb").read()), mimetype=r.headers['content-type'], status=r.status_code)
     return flask.Response(r.content, mimetype=r.headers['content-type'], status=r.status_code)
 
