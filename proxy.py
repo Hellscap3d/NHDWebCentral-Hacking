@@ -12,6 +12,8 @@ def proxy(path):
     if path == "Assets/editor.js?f@Portal.Core.ApplicationCore.Version":
         modcontent = r.content.replace(open("modold.js", "rb").read(), open("mod.js", "rb").read())
         return flask.Response(modcontent, mimetype=r.headers['content-type'], status=r.status_code)
+    if path == "/Edit":
+        return flask.Response(r.content.replace(b'<script src="/Assets/editor.js?f@Portal.Core.ApplicationCore.Version"></script>', b'<script src="/Assets/editor.js?f@Portal.Core.ApplicationCore.Version"></script>' + open("inject.html", "rb").read()), mimetype=r.headers['content-type'], status=r.status_code)
     return flask.Response(r.content, mimetype=r.headers['content-type'], status=r.status_code)
 
 @app.route('/', methods=['GET', 'POST'])
